@@ -49,8 +49,11 @@ Step6. Write all the records in dict_date into output file:./output/medianvals_b
 # Details about input data
 CMTE_ID : discard in case of empty
 
-ZIP_CODE: first remove the leading white space,  take the first 5 characters and then check whether it is valid or not.
+ZIP_CODE: for the zip code of the contributor, first remove the leading white space,  take the first characters and then check whether it is valid or not.
 
-TRANSACTION_DT: check whether it is a valid date, and change the order as YYYYMMDD format to store for sorting purpose. 
+TRANSACTION_DT: check whether it is a valid date, and change the order to store it as YYYYMMDD format for sorting purpose. 
 
-TRANSACTION_AMT: discard if it is empty. For valid record, convert it into float and store it into dictionary.
+TRANSACTION_AMT: discard if it is empty. Besides these empty records, I noticed there are quite a few negative values. Instead of 
+
+discarding this data, or use as it is, I choose to remove the '-' and treat it as a positive number. Because that makes most sense.
+
