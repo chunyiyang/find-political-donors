@@ -1,6 +1,5 @@
 
 import sys
-import re
 from heapq import *
 
 class DonationValue: 
@@ -100,8 +99,8 @@ def getZipcode(zip_code):
     otherwise return zip_code[:5]
     '''      
     return_value  = None
-    zip_code = re.sub("[^0-9a-zA-Z]", "", zip_code)
-    if len(zip_code) >= 5:
+    zip_code = zip_code.lstrip()
+    if len(zip_code) >= 5 and zip_code[:5].isdigit():
         return_value = zip_code[:5]
     return return_value
 
@@ -110,7 +109,6 @@ def getAmount(transaction_amount):
     return None if transaction_amount is empty or malformatted
     otherwise return float(transaction_amount)
     '''      
-    transaction_amount = re.sub("[^0-9.]", "", transaction_amount)
     try:
         float(transaction_amount)
         return_value = float(transaction_amount)

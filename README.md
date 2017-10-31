@@ -1,26 +1,32 @@
-
 # Introduction
 This project is to take an input file that lists campaign contributions by individual donors and distill it into two output files:
+
 medianvals_by_zip.txt: contains a calculated running median, total dollar amount and total number of contributions by recipient and zip code
+
 medianvals_by_date.txt: has the calculated median, total dollar amount and total number of contributions by recipient and date.
 
 # Programming Language
 This project is implemented in Python3. 
 
-# Libraries
-Need to import sys and heapq
+# Dependancies 
+* sys
+* heapq
 
 # Execution:
 Execute with Python3
+
 To execute this program, please run ./run.sh file.
+
 command: python ./src/find_political_donors.py ./input/itcont.txt ./output/medianvals_by_zip.txt ./output/medianvals_by_date.txt
 format: python execute_file  [arg1]input_file [arg2]outputt_file1 [arg3]output_file2 
 
 # Data structure
 This project used python dictionary to store the data.
+
 First dictionary is dict_zip, key is string type: key = cmte_id + '|' + zip_code.
-Second dictionary is dict_date, key is string type: key = cmte_id + '|' + transanction_date
+Second dictionary is dict_date, key is string type: key = cmte_id + '|' + transanction_date.
 For both dictionaries, use object of DonationValue as value.
+
 DonationValue has three entries: 2 heaps(one minHeap and one is maxHeap) and the sum.
 Use these two heaps to store all the donation numbers.
 When there are even numbers, len(minHeap) == len(maxHeap). When there are odd numbers,len(maxHeap) = len(minHeap) + 1.
@@ -29,35 +35,22 @@ When a new number comes, the insertion and rebalancing takes O(lgn) time complex
 
 # Process flow
 Step1. Read one line from input file
+
 Step2. Analysize this record 
+
 Step3. If the zip related data is valid, store the data into dict_zip and write this record into medianvals_by_zip.txt.
+
 Step4. If the date related data is valid, store the data into dict_date and write this record into medianvals_by_date.txt.
+
 Step5. Repeat from step2 to step5 until finish all the records in input file.
+
 Step6. Write all the records in dict_date into output file:./output/medianvals_by_date.txt
 
+# Details about input data
+CMTE_ID : discard in case of empty
 
-# Repo directory structure
-    ├── README.md 
-    ├── run.sh
-    ├── src
-    │   └── find_political_donors.py
-    ├── input
-    │   └── itcont.txt
-    ├── output
-    |   └── medianvals_by_zip.txt
-    |   └── medianvals_by_date.txt
-    ├── insight_testsuite
-        └── run_tests.sh
-        └── tests
-            └── test_1
-            |   ├── input
-            |   │   └── itcont.txt
-            |   |__ output
-            |   │   └── medianvals_by_zip.txt
-            |   |__ └── medianvals_by_date.txt
-            ├── test_2
-                ├── input
-                │   └── your-own-input.txt
-                |── output
-                    └── medianvals_by_zip.txt
-                    └── medianvals_by_date.txt
+ZIP_CODE: first remove the leading white space,  take the first 5 characters and then check whether it is valid or not.
+
+TRANSACTION_DT: check whether it is a valid date, and change the order as YYYYMMDD format to store for sorting purpose. 
+
+TRANSACTION_AMT: discard if it is empty. For valid record, convert it into float and store it into dictionary.
