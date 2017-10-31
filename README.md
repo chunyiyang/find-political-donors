@@ -25,9 +25,9 @@ This project used python dictionary to store the data.
 
 First dictionary is dict_zip, key is string type: key = cmte_id + '|' + zip_code.
 Second dictionary is dict_date, key is string type: key = cmte_id + '|' + transanction_date.
-For both dictionaries, use object of DonationValue as value.
+For both dictionaries, use object of DonationValue class as value.
 
-DonationValue has three entries: 2 heaps(one minHeap and one is maxHeap) and the sum.
+DonationValue class has three entries: 2 heaps(one minHeap and one is maxHeap) and the sum.
 Use these two heaps to store all the donation numbers.
 When there are even numbers, len(minHeap) == len(maxHeap). When there are odd numbers,len(maxHeap) = len(minHeap) + 1.
 All the numbers in maxHeap is less or equal to the numbers in minHeap.
@@ -47,13 +47,11 @@ Step5. Repeat from step2 to step5 until finish all the records in input file.
 Step6. Write all the records in dict_date into output file:./output/medianvals_by_date.txt
 
 # Details about input data
-CMTE_ID : discard in case of empty
+CMTE_ID : discard this record in case of empty
 
-ZIP_CODE: for the zip code of the contributor, first remove the leading white space,  take the first characters and then check whether it is valid or not.
+ZIP_CODE: first remove the leading white space,  take the first five characters and then check whether it is valid or not.
 
 TRANSACTION_DT: check whether it is a valid date, and change the order to store it as YYYYMMDD format for sorting purpose. 
 
-TRANSACTION_AMT: discard if it is empty. Besides these empty records, I noticed there are quite a few negative values. Instead of 
-
-discarding this data, or use as it is, I choose to remove the '-' and treat it as a positive number. Because that makes most sense.
+TRANSACTION_AMT: discard if it is empty. Convert it into float type and store it into dict_date and dict_zip. 
 
