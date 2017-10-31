@@ -1,9 +1,13 @@
 # Introduction
 This project is to take an input file that lists campaign contributions by individual donors and distill it into two output files:
 
-medianvals_by_zip.txt: contains a calculated running median, total dollar amount and total number of contributions by recipient and zip code
+execute file: ./src/find_political_donors.py
 
-medianvals_by_date.txt: has the calculated median, total dollar amount and total number of contributions by recipient and date.
+input file: ./input/itcont.txt
+
+output file1: ./output/medianvals_by_zip.txt: contains a calculated running median, total dollar amount and total number of contributions by recipient and zip code
+
+output_file2: ./output/medianvals_by_date.txt: has the calculated median, total dollar amount and total number of contributions by recipient and date.
 
 # Programming Language
 This project is implemented in Python3. 
@@ -18,6 +22,7 @@ Execute with Python3
 To execute this program, please run ./run.sh file.
 
 command: python ./src/find_political_donors.py ./input/itcont.txt ./output/medianvals_by_zip.txt ./output/medianvals_by_date.txt
+
 format: python execute_file  [arg1]input_file [arg2]outputt_file1 [arg3]output_file2 
 
 # Data structure
